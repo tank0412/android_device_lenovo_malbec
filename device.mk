@@ -705,6 +705,40 @@ PRODUCT_PACKAGES += \
 BOARD_SHIPPING_API_LEVEL := 202404
 PRODUCT_SHIPPING_API_LEVEL := 36
 
+# Audio
+PRODUCT_PACKAGES += \
+    audiohalservice.qti \
+    qtiaudiohalvendorextn
+
+PRODUCT_PACKAGES += \
+    android.hardware.audio.common-V3-ndk.vendor \
+    android.hardware.audio.core-V2-ndk.vendor \
+    android.hardware.audio.core.sounddose-V1-ndk.vendor \
+    android.hardware.audio.core.sounddose-V2-ndk.vendor \
+    android.hardware.audio.effect-V2-ndk.vendor \
+    android.media.audio.common.types-V3-ndk.vendor \
+    vendor.qti.hardware.paleventnotifier-V2-ndk.vendor \
+    libalsautilsv2.vendor \
+    libaudioaidlcommon.vendor \
+    libaudioutils_shim \
+    libmalbec_dap_bridge \
+    libmediautils_vendor.vendor \
+    libmemunreachable.vendor
+
+PRODUCT_PACKAGES += \
+    android.hardware.soundtrigger3-V1-ndk.vendor \
+    android.media.soundtrigger.types-V1-ndk.vendor \
+    libaudio_aidl_conversion_common_ndk.vendor \
+    libflatbuffers-cpp.vendor \
+    qti-audio-types-aidl-V1-ndk.vendor
+
+PRODUCT_PACKAGES += \
+    manifest_audiocorehal_default.xml \
+    audioeffectservice_qti.xml \
+    libaudioeffecthal.qti
+
+AUDIO_HAL_DIR := hardware/qcom-caf/sm8750/audio/primary-hal
+
 # ── Hardware feature declarations ───────────────────────────────────────────
 #
 # ★ Every one of these arrived only through proprietary-files.txt until session
