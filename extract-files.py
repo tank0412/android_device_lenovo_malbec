@@ -803,8 +803,22 @@ blob_fixups: blob_fixups_user_type = {
     # than collateral: it names libswspatializeraidl.so, and that file does not
     # exist in our image OR in the factory image. Lenovo over-declared it.
     ('vendor/etc/audio/sku_tuna/audio_effects_config.xml',): blob_fixup()
-        .regex_replace(r'(?s)[ \t]*<!--DOLBY DAP-->.*?<!--DOLBY END-->\n', '')
-        .regex_replace(r'(?m)^[ \t]*<apply effect="dlb_music_listener"/>\n', ''),
+        # ⚠️ `dap` is KEPT and retargeted: it names libmalbec_dap_bridge.so, our
+        # own quad->stereo bridge around libswdapaidl.so, and it is what makes the
+        # speakers produce sound.
+        #
+        # UUID NOTE: libswdapaidl.so ships with built-in type UUID
+        # fa81dbde-588b-11ed-9b6a-0242ac120002. Some factory images (notably
+        # TB390FU) use fa81de0e-... instead, which causes createEffect to return
+        # EX_ILLEGAL_ARGUMENT and the effect to be silently skipped. Force the
+        # correct UUID regardless of what the source blob has.
+        .regex_replace(r'<library name="dap" path="libswdapaidl\.so"/>',
+                       '<library name="dap" path="libmalbec_dap_bridge.so"/>')
+        .regex_replace(r'fa81de0e-588b-11ed-9b6a-0242ac120002',
+                       'fa81dbde-588b-11ed-9b6a-0242ac120002')
+        .regex_replace(r'(?s)[ \t]*<library name="spatializer"[^>]*/>\n', '')
+        .regex_replace(r'(?s)[ \t]*<effect name="spatializer"[^>]*/>\n', '')
+        .regex_replace(r'(?m)^[ \t]*<!--DOLBY (?:SPATIALIZER|END)-->\n', ''),
 
     # ★ Strip the 8K camcorder profiles. Six blocks, three cameras, one sensor
     # that is 4208 pixels wide.

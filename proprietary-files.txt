@@ -1011,7 +1011,7 @@ vendor/etc/aidl/le_audio/aidl_audio_set_configurations.json
 vendor/etc/aidl/le_audio/aidl_audio_set_scenarios.json
 vendor/etc/audio/audio_module_config_primary.xml
 vendor/etc/audio/sku_tuna/audio_effects.xml
-vendor/etc/audio/sku_tuna/audio_effects_config.xml|daca9f2e744554e4a66564ddfb4f4e33a4732746|8a10f5903dd008f027d6417027f3ad81af56cec3
+vendor/etc/audio/sku_tuna/audio_effects_config.xml|daca9f2e744554e4a66564ddfb4f4e33a4732746|45fa6eb2551cc8708b23c2ada6524f6715f28dcc
 vendor/etc/audio/sku_tuna/audio_effects_config_stub.xml
 vendor/etc/audio/sku_tuna/audio_policy_configuration.xml
 vendor/etc/audio/sku_tuna/mixer_paths_tuna_qrd.xml
@@ -1146,6 +1146,7 @@ vendor/lib64/soundfx/libqcompostprocbundle.so;DISABLE_DEPS
 vendor/lib64/soundfx/libqcomvisualizer.so;DISABLE_DEPS
 vendor/lib64/soundfx/libqcomvoiceprocessing.so;DISABLE_DEPS
 vendor/lib64/soundfx/libreverbaidl.so;DISABLE_DEPS
+vendor/lib64/soundfx/libswdapaidl.so;DISABLE_DEPS
 vendor/lib64/soundfx/libvisualizeraidl.so;DISABLE_DEPS
 vendor/lib64/soundfx/libvolumelistener.so;DISABLE_DEPS
 vendor/lib64/vendor.qti.hardware.ListenSoundModelAidl-V1-ndk.so
@@ -2144,6 +2145,7 @@ vendor/lib64/libdiag.so
 vendor/lib64/libdigital-dimming.so
 vendor/lib64/libdisp-aba.so
 vendor/lib64/libdlbdsservice.so
+vendor/lib64/libdlbpreg.so
 vendor/lib64/libdmshal.so
 vendor/lib64/libdolbyclstc.so
 vendor/lib64/libdolbydecoderprocessor.so
@@ -2462,3 +2464,6 @@ vendor/lib64/vendor.qti.qspmhal-impl.so
 vendor/lib64/vendor.qti.snapdragonServices-V1-ndk.so
 vendor/lib64/vendor.qti.snapdragonServices.qape-V1-ndk.so
 vendor/lib64/vendor.qti.syshealthmon-V1-ndk.so
+vendor/lib64/soundfx/libquasar.so;DISABLE_DEPS
+vendor/lib64/soundfx/libdlbvolaidl.so;DISABLE_DEPS
+vendor/lib64/soundfx/libswgamedapaidl.so;DISABLE_DEPS

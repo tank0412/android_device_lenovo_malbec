@@ -1393,3 +1393,12 @@ ifneq (,$(filter 0 1 true,$(MALBEC_BRINGUP)))
 PRODUCT_SYSTEM_PROPERTIES += \
     service.adb.root=1
 endif
+
+# Audio configs (ported from hirero-exists PixelOS-A17)
+# audio XMLs handled by malbec-vendor.mk (single source: vendor/.../proprietary/vendor/etc/audio/)
+
+# quasar_config.xml (QTI HAL config, ported from hirero)
+PRODUCT_COPY_FILES += \
+    $(AUDIO_HAL_DIR)/configs/sun/quasar_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_tuna/quasar_config.xml
+
+

@@ -154,3 +154,17 @@ set_prop(hal_audio_default, vendor_audio_prop)
 # HAL a directory read over all of debugfs to gain nothing is the wrong trade.
 # dontaudit rather than allow, so the noise goes away without the access.
 dontaudit hal_audio_default debugfs:dir { read open search };
+
+# DAP restored (libswdapaidl.so from TB378FC) - DVL (libdlbvolaidl.so)
+# needs to reach vendor.dolby.dms.IDms/default again. The 3 rules above
+# (see "Dolby DMS: nothing here any more" block) were retired when DAP
+# was stripped in session 19; bring them back now that DAP is restored.
+#
+# Explicit allow rather than binder_call/hal_client_domain because our
+# hal_third_party.te defines hal_aidl_dms_default as plain type (not via
+# hal_server_domain), so there is no hal_aidl_dms attribute to reference.
+allow hal_audio_default hal_aidl_dms_default:binder { call transfer };
+allow hal_audio_default hal_aidl_dms_default:fd *;
+allow hal_audio_default hal_aidl_dms_service:service_manager find;
+allow hal_aidl_dms_default hal_audio_default:binder { call transfer };
+allow hal_aidl_dms_default hal_audio_default:fd *;
