@@ -1,91 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Local manifest for malbec (Lenovo TB390FU) on LineageOS 23.2.
+     Local manifest for malbec (Lenovo TB390FU) on crDroid 13 (Android 17).
 
-     Copy to .repo/local_manifests/malbec.xml in a fresh checkout, then
-     `repo sync`.
-
-     ⚠️ WHY THIS FILE EXISTS INSTEAD OF `breakfast malbec`
-
-     `lineage.dependencies` is the LineageOS-native mechanism and it CANNOT work
-     for a personal fork. vendor/lineage/build/tools/roomservice.py hardcodes the
-     LineageOS organisation in two places:
-
-         line 222   'name': f'LineageOS/{repo_name}'
-         line 327   git ls-remote https://:@github.com/LineageOS/<repo_name>
-
-     and the `remote` escape at lines 226 to 233 applies only to `aosp-*`
-     remotes; other remote names are ignored and the LineageOS-prefixed project
-     remains. So a dependency written as
-
-         "repository": "suddenBook/proprietary_vendor_lenovo_malbec"
-
-     is probed as `LineageOS/suddenBook/proprietary_vendor_lenovo_malbec`, comes
-     back with no branches, and roomservice.py line 349 exits with
-
-         Default revision lineage-23.2 not found in ... Bailing.
-
-     Moving the four custom repos onto the `lineage-23.2` branch was a real and
-     separate bug, and fixing it was necessary but not sufficient: the
-     organisation prefix cannot be fixed from the device tree at all. Hence this
-     file.
-
-     `lineage.dependencies` is retained as machine-readable dependency intent,
-     but it is not a working bootstrap file. If the repositories ever move to
-     LineageOS, their `suddenBook/` prefixes must also be removed there.
-
-     ⚠️ AFTER SYNCING, BEFORE BUILDING
-
-     vendor/gapps uses Git LFS and `repo sync` does not smudge it. GmsCore.apk
-     (175 MB) and Velvet.apk (254 MB) remain pointer files if LFS is not enabled
-     and the objects are not pulled. Left that way, the build can still appear
-     successful while the device has no usable Play Services.
-
-     Run the two LFS commands from the device tree's README (`git lfs install`
-     with the local flag, then `git lfs pull`). `git lfs pull`
-     on its own prints "Skipping object checkout, Git LFS is not installed for
-     this repository" and EXITS 0. work/scripts/01-lfs-check.sh is tree-wide and
-     is a pre-flight in 40-build.sh, so a build cannot start with a pointer.
-
-     ⚠️ ABOUT vendor/gapps
-
-     This device ships full GMS (owner's decision, session 23). LineageOS's own
-     mechanism — WITH_GMS=true plus vendor/partner_gms — is not usable outside
-     the official build farm: partner_gms is not in the public manifest and
-     LineageOS/android_vendor_partner_gms is not a public repository. MindTheGapps
-     is the maintained public equivalent; branch `baklava` is Android 16, which
-     is what LineageOS 23.x is. It MUST be checked out at exactly `vendor/gapps`:
-     its common-vendor.mk inherits `vendor/gapps/common/common-vendor.mk` by
-     absolute path.
-
-     These custom projects use moving branch revisions. That is deliberate for
-     normal development and GMS security updates, but it means two syncs a month
-     apart need not produce the same image. Pin every project to a SHA for an
-     immutable source selection.
+     device, kernel and vendor are all confirmed to have `crDroid-17.0`.
+     MindTheGapps branch mapping:
+         baklava     = Android 16 (LineageOS 23.x)   NOT for crDroid 13
+         cinnamonbun = Android 17 (LineageOS 24)     correct for crDroid 13
 -->
 <manifest>
-    <remote name="tank0412"
-            fetch="https://github.com/tank0412"
-            revision="refs/heads/lineage-23.2" />
+    <remote name="tank0412" fetch="https://github.com/tank0412" />
 
     <project path="device/lenovo/malbec"
              name="android_device_lenovo_malbec"
-             remote="tank0412" />
+             remote="tank0412"
+             revision="crDroid-17.0" />
 
     <project path="device/lenovo/malbec-kernel"
              name="android_device_lenovo_malbec-kernel"
-             remote="tank0412" />
+             remote="tank0412"
+             revision="crDroid-17.0" />
 
     <project path="vendor/lenovo/malbec"
              name="proprietary_vendor_lenovo_malbec"
-             remote="tank0412" />
+             remote="tank0412"
+             revision="crDroid-17.0" />
 
-    <remote name="mindthegapps"
-            fetch="https://gitlab.com/MindTheGapps" />
-
+    <remote name="mindthegapps" fetch="https://gitlab.com/MindTheGapps" />
     <project path="vendor/gapps"
              name="vendor_gapps"
              remote="mindthegapps"
-             revision="baklava"
+             revision="cinnamonbun"
              clone-depth="1" />
 </manifest>
