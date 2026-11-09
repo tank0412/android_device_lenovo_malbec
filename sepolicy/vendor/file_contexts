@@ -140,4 +140,4 @@
 # for it), so on the shipping ZUI image — which IS enforcing — system_server
 # cannot pin this library. We are deliberately better than stock here rather than
 # at parity.
-/vendor/lib(64)?/libsdmextension\.so                                           u:object_r:same_process_hal_file:s0
+# DUPLICATE with device/qcom/sepolicy_vndr/sm8750, kept there: /vendor/lib(64)?/libsdmextension\.so                                           u:object_r:same_process_hal_file:s0
